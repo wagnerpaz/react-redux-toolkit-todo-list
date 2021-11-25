@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "description": "Setup react & typescript",
+      "done": true
+    },
+    {
+      "id": 2,
+      "description": "Setup eslint & prettier",
+      "done": true
+    },
+    {
+      "id": 3,
+      "description": "Setup redux",
+      "done": true
+    },
+    {
+      "id": 4,
+      "description": "Setup API",
+      "done": true
+    }
+  ]
+}
