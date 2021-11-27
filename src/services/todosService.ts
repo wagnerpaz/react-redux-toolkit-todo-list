@@ -12,13 +12,9 @@ export function postTodo(todo: Todo) {
 }
 
 export function putTodo(todo: Todo) {
-  return axiosInstance.put<Todo>(`${BASE_PATH}/{id}`, todo, {
-    params: { id: todo.id },
-  });
+  return axiosInstance.put<Todo>(`${BASE_PATH}/${todo.id}`, todo);
 }
 
 export function deleteTodo(todo: Todo) {
-  return axiosInstance.delete<Todo>(`${BASE_PATH}/{id}`, {
-    params: { id: todo.id },
-  });
+  return axiosInstance.delete<Todo>(`${BASE_PATH}/${todo.id}`);
 }

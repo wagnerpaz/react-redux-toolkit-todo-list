@@ -4,7 +4,7 @@ import {
   SliceCaseReducers,
 } from '@reduxjs/toolkit';
 
-import { getTodos, postTodo } from '../../services/todosService';
+import { getTodos, postTodo, deleteTodo, putTodo } from '../../services/todosService';
 import { RootState } from '../store';
 
 const NAME_PREFIX = 'todos';
@@ -25,6 +25,22 @@ export const addTodo = createAsyncThunk(
   }
 );
 
+export const modifyTodo = createAsyncThunk(
+  `${NAME_PREFIX}/modifyTodo`,
+  async (todo: Todo) => {
+    const response = await putTodo(todo);
+    return response.data;
+  }
+);
+
+export const removeTodo = createAsyncThunk(
+  `${NAME_PREFIX}/removeTodo`,
+  async (todo: Todo) => {
+    await deleteTodo(todo);
+    return todo;
+  }
+);
+
 export const todosSlice = createSlice<State, Reducers>({
   name: NAME_PREFIX,
   initialState: {
@@ -38,6 +54,12 @@ export const todosSlice = createSlice<State, Reducers>({
       })
       .addCase(addTodo.fulfilled, (state, { payload }) => {
         state.list.push(payload);
+      })
+      .addCase(modifyTodo.fulfilled, (state, { payload }) => {
+        state.list = state.list.map(t => t.id === payload.id ? payload : t);
+      })
+      .addCase(removeTodo.fulfilled, (state, { payload }) => {
+        state.list = state.list.filter(t => t.id !== payload.id);
       });
   },
 });
