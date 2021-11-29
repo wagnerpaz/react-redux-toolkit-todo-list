@@ -2,4 +2,18 @@
   width: 100%;
   max-width: 1024px;
   margin: auto;
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 1024px;
+  background-color: #fff;
+  padding-bottom: 10px;
+}
+
+.list {
+  padding-top: 90px;
 }

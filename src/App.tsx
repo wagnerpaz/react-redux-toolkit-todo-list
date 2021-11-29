@@ -27,11 +27,11 @@ function App() {
   };
 
   const onToogleDone = (todo: Todo) => {
-    dispatch(modifyTodo({...todo, done: !todo.done}));
+    dispatch(modifyTodo({ ...todo, done: !todo.done }));
   };
 
   const onRemove = (todo: Todo) => {
-    if(confirm('Do you want to remove this item?')) {
+    if (confirm('Do you want to remove this item?')) {
       dispatch(removeTodo(todo));
     }
   };
@@ -42,18 +42,25 @@ function App() {
 
   return (
     <div className={styles.rootContainer}>
-      <h1>Todos</h1>
       <form onSubmit={onAdd}>
-        <Input
-          fullWidth
-          type='text'
-          value={description}
-          placeholder="Type a todo and hit Enter to add..."
-          onChange={(e) => setDecription(e.target.value)}
-        />
-        <ul>
+        <div className={styles.header}>
+          <h1>Todos</h1>
+          <Input
+            fullWidth
+            type='text'
+            value={description}
+            placeholder='Type a todo and hit Enter to add...'
+            onChange={(e) => setDecription(e.target.value)}
+          />
+        </div>
+        <ul className={styles.list}>
           {allTodos.map((t: Todo) => (
-            <TodoItem key={t.id} todo={t} onToogleDone={onToogleDone} onRemove={onRemove}/>
+            <TodoItem
+              key={t.id}
+              todo={t}
+              onToogleDone={onToogleDone}
+              onRemove={onRemove}
+            />
           ))}
         </ul>
       </form>
