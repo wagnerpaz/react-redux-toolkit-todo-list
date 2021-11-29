@@ -12,12 +12,14 @@ import {
   selectAllTodos,
   removeTodo,
   modifyTodo,
+  selectLoadingTodoIds,
 } from './redux/slices/todosSlice';
 
 function App() {
   const [description, setDecription] = useState('');
 
   const allTodos = useSelector(selectAllTodos);
+  const allTodoLoadings = useSelector(selectLoadingTodoIds);
   const dispatch = useDispatch();
 
   const onAdd = (e: FormEvent<HTMLFormElement>) => {
@@ -31,9 +33,7 @@ function App() {
   };
 
   const onRemove = (todo: Todo) => {
-    if (confirm('Do you want to remove this item?')) {
-      dispatch(removeTodo(todo));
-    }
+    dispatch(removeTodo(todo));
   };
 
   useEffect(() => {
@@ -44,7 +44,8 @@ function App() {
     <div className={styles.rootContainer}>
       <form onSubmit={onAdd}>
         <div className={styles.header}>
-          <h1>Todos</h1>
+          <h1 className={styles.h1}>Todos</h1>
+          <span>Processing: {allTodoLoadings.length} requests</span>
           <Input
             fullWidth
             type='text'
