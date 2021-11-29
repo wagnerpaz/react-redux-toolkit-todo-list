@@ -40,6 +40,8 @@ function App() {
     dispatch(getAllTodos());
   }, [dispatch]);
 
+  console.log(allTodoLoadings);
+
   return (
     <div className={styles.rootContainer}>
       <form onSubmit={onAdd}>
@@ -59,6 +61,7 @@ function App() {
             <TodoItem
               key={t.id}
               todo={t}
+              loading={!!allTodoLoadings.find((l) => l.payload?.id === t.id)}
               onToogleDone={onToogleDone}
               onRemove={onRemove}
             />

@@ -10,6 +10,10 @@
   text-decoration: line-through;
 }
 
+.loading {
+  background-color: lightyellow;
+}
+
 .description {
   flex: 1;
 }

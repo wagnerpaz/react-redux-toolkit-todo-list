@@ -69,20 +69,24 @@ export const todosSlice = createSlice<State, Reducers>({
       })
       .addMatcher(
         (action) => action?.meta?.requestStatus === 'pending',
-        (state, { meta: { requestId } }) => {
-          state.loading.push(requestId);
+        (state, { meta: { requestId, arg } }) => {
+          state.loading.push({ requestId, payload: arg });
         }
       )
       .addMatcher(
         (action) => action?.meta?.requestStatus === 'fulfilled',
         (state, { meta: { requestId } }) => {
-          state.loading = state.loading.filter((l) => l !== requestId);
+          state.loading = state.loading.filter(
+            (l) => l.requestId !== requestId
+          );
         }
       )
       .addMatcher(
         (action) => action?.meta?.requestStatus === 'rejected',
         (state, { meta: { requestId } }) => {
-          state.loading = state.loading.filter((l) => l !== requestId);
+          state.loading = state.loading.filter(
+            (l) => l.requestId !== requestId
+          );
         }
       );
   },
@@ -101,7 +105,12 @@ export default todosSlice.reducer;
 
 interface State {
   list: Todo[];
-  loading: string[];
+  loading: Loading[];
+}
+
+interface Loading {
+  requestId: string;
+  payload?: any;
 }
 
 type Reducers = SliceCaseReducers<State>;
