@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   width: calc(100% - 40px);
-  max-width: 1024px;
+  max-width: calc(1024px - 40px);
   background-color: #fff;
   padding-bottom: 10px;
 }
